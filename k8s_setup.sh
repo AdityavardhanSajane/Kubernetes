@@ -12,7 +12,10 @@ else
     echo "✅ Running Worker Node Setup..."
 fi
 
+echo "*************************"
+echo "*************************"
 # Step 1 - Set hostname and update /etc/hosts
+echo "*************************"
 echo "*************************"
 echo "Step 1: Setting Hostname and Updating /etc/hosts"
 if [[ "$is_master" == "yes" ]]; then
@@ -24,8 +27,13 @@ fi
 hostname -I >> /etc/hosts
 hostname >> /etc/hosts
 
+
+echo "*************************"
+echo "*************************"
 # Step 2 - Load Kernel Modules
 echo "*************************"
+echo "*************************"
+
 echo "Step 2: Loading Kernel Modules for Kubernetes"
 modprobe br_netfilter
 modprobe ip_vs
@@ -53,8 +61,12 @@ EOF
 
 sysctl --system
 
+echo "*************************"
+echo "*************************"
 # Step 3 - Disable Swap
 echo "*************************"
+echo "*************************"
+
 echo "Step 3: Disabling Swap Memory"
 sudo swapoff -a
 sed -e '/swap/s/^/#/g' -i /etc/fstab
@@ -62,7 +74,11 @@ cat /etc/fstab
 
 # Step 4 - Install Docker and Containerd
 echo "*************************"
+echo "*************************"
 echo "Step 4: Installing Docker and Containerd"
+echo "*************************"
+echo "*************************"
+
 sudo dnf config-manager --add-repo https://download.docker.com/linux/centos/docker-ce.repo
 sudo dnf makecache
 sudo dnf -y install containerd.io
@@ -74,8 +90,12 @@ sed -i 's/SystemdCgroup = false/SystemdCgroup = true/' /etc/containerd/config.to
 systemctl enable --now containerd.service
 sudo systemctl status containerd.service
 
+echo "*************************"
+echo "*************************"
 # Step 5 - Install Kubernetes
 echo "*************************"
+echo "*************************"
+
 echo "Step 5: Installing Kubernetes"
 cat <<EOF | sudo tee /etc/yum.repos.d/kubernetes.repo
 [kubernetes]
@@ -91,7 +111,12 @@ dnf makecache
 dnf install -y kubelet kubeadm kubectl --disableexcludes=kubernetes
 systemctl enable --now kubelet.service
 
+echo "*************************"
+echo "*************************"
 # Step 6 (Only for Master Node)
+echo "*************************"
+echo "*************************"
+
 if [[ "$is_master" == "yes" ]]; then
     echo "*************************"
     echo "Step 6: Initializing Kubernetes Cluster (Master Only)"
