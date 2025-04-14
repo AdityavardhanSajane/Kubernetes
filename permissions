@@ -1,0 +1,2 @@
+chmod +x k8s_cluster_setup.sh
+./k8s_cluster_setup.sh
