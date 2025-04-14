@@ -23,7 +23,6 @@ fi
 
 hostname -I >> /etc/hosts
 hostname >> /etc/hosts
-exec bash
 
 # Step 2 - Load Kernel Modules
 echo "*************************"
