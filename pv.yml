@@ -8,7 +8,7 @@ spec:
   accessModes:
     - ReadWriteMany
   nfs:
-    server: 172.31.18.29  # NFS server IP
+    server: 172.31.26.92  # NFS server IP
     path: /index_dir
   persistentVolumeReclaimPolicy: Retain
 
